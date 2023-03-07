@@ -1,4 +1,5 @@
 const TicTacToeGame = require('./TicTacToeGame');
+const Location = require('./Location');
 
 describe('Board', () => {
   test('test init board', () => {
@@ -31,14 +32,21 @@ describe('Board', () => {
     expect(game.playerMoveFirst.sign).toBe('X');
   });
 
-  // test('test existed position', (x, y) => {
-  //   const t = () => {
-  //     throw new TypeError('UNKNOWN ERROR');
-  //   };
+  test('test check action', () => {
+    const game = new TicTacToeGame();
+    const location = new Location({ x: 1, y: 2 });
+    game.start();
+    game.action(location);
+    expect(game.boards[1][2]).toBe('X');
+  });
 
-  //   const game = new TicTacToeGame();
-  //   if (game.boards[x][y] !== 0) {
-  //     expect(t).toThrow('Existed');
-  //   }
-  // });
+  test('test second action', () => {
+    const game = new TicTacToeGame();
+    const location1 = new Location({ x: 1, y: 2 });
+    const location2 = new Location({ x: 2, y: 2 });
+    game.start();
+    game.action(location1);
+    game.action(location2);
+    expect(game.boards[2][2]).toBe('O');
+  });
 });

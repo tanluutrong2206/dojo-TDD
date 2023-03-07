@@ -15,6 +15,9 @@ class TicTacToeGame {
   start() {
     this.playerMoveFirst = this.players[0];
   }
+  action(location) {
+    this.boards[location.x][location.y] = this.playerMoveFirst.sign;
+  }
 }
 
 module.exports = TicTacToeGame;
