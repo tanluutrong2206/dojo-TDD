@@ -114,4 +114,43 @@ describe('Board', () => {
     expect(game.isEnd).toBe(true);
     expect(game.wonPlayer.sign).toBe('X');
   });
+
+  test('test should it count the number of X and O in a diagonal row', () => {
+    const game = new TicTacToeGame();
+
+    game.start();
+    for (let i = 0; i < 4; i++) {
+      const location1 = new Location({ x: i, y: i });
+      const location2 = new Location({ x: i + 1, y: i });
+      game.action(location1);
+      game.action(location2);
+    }
+    const count = game.countDiagonalLeftNumberLastAction(
+      new Location({ x: 4, y: 3 })
+    );
+    expect(count).toBe(4);
+  });
+
+  test('test should it count the number of X and O in right diagonal row', () => {
+    const game = new TicTacToeGame();
+
+    game.start();
+    for (let i = 1; i <= 4; i++) {
+      const locationX = new Location({
+        x: i,
+        y: game.size - i,
+      });
+      const locationO = new Location({
+        x: i,
+        y: game.size - i - 1,
+      });
+
+      game.action(locationX);
+      game.action(locationO);
+    }
+    const count = game.countDiagonalRightNumberLastAction(
+      new Location({ x: 2, y: 3 })
+    );
+    expect(count).toBe(4);
+  });
 });

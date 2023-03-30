@@ -72,6 +72,47 @@ class TicTacToeGame {
     }
     return count - 1;
   }
+
+  countDiagonalLeftNumberLastAction(location) {
+    const currentPlayerSign = this.boards[location.x][location.y];
+    let count = 0;
+
+    for (let i = 0; location.y - i >= 0; i++) {
+      if (this.boards[location.x - i][location.y - i] === currentPlayerSign) {
+        count++;
+      } else {
+        break;
+      }
+    }
+    for (let j = 0; location.y + j < this.size; j++) {
+      if (this.boards[location.x + j][location.y + j] === currentPlayerSign) {
+        count++;
+      } else {
+        break;
+      }
+    }
+
+    return count - 1;
+  }
+  countDiagonalRightNumberLastAction(location) {
+    const currentPlayerSign = this.boards[location.x][location.y];
+    let count = 0;
+    const currentX = location.x;
+    const currentY = location.y;
+    // 2 3
+    for (let i = 0; currentX + i < this.size; i++) {
+      if (this.boards[currentX + i][currentY + i] === currentPlayerSign) {
+        count += 1;
+      }
+    }
+    for (let i = 0; currentX - i >= 0; i++) {
+      if (this.boards[currentX - i][currentY - i] === currentPlayerSign) {
+        count += 1;
+      }
+    }
+
+    return count - 1;
+  }
 }
 
 module.exports = TicTacToeGame;
